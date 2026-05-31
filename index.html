@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Neerali Acharya — Senior AI Engineer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #fafaff;
+      --glass: rgba(255,255,255,0.72);
+      --glass-solid: #ffffff;
+      --border: rgba(120,110,200,0.14);
+      --border2: rgba(120,110,200,0.28);
+      --text: #14132a;
+      --text2: #45446a;
+      --muted: #8b8ab0;
+      --accent: #6d5ef7;
+      --accent2: #a78bfa;
+      --accent3: #f472b6;
+      --cyan: #38bdf8;
+      --pill: rgba(109,94,247,0.08);
+      --pill-text: #5b4ee0;
+      --shadow-sm: 0 1px 3px rgba(80,70,160,0.06);
+      --shadow: 0 8px 32px rgba(80,70,160,0.1);
+      --shadow-lg: 0 24px 70px rgba(80,70,160,0.18);
+      --grad: linear-gradient(120deg, #6d5ef7 0%, #a78bfa 45%, #f472b6 100%);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      position: relative;
+    }
+
+    /* ── MAGICAL BACKGROUND ── */
+    #bg-canvas {
+      position: fixed; inset: 0; z-index: 0;
+      pointer-events: none;
+    }
+    .aurora {
+      position: fixed; inset: 0; z-index: -1; overflow: hidden; pointer-events: none;
+    }
+    .blob {
+      position: absolute; border-radius: 50%;
+      filter: blur(90px); opacity: 0.5;
+      mix-blend-mode: multiply;
+      animation: float 22s ease-in-out infinite;
+    }
+    .blob.b1 { width: 620px; height: 620px; background: radial-gradient(circle, #c4b5fd, transparent 70%); top: -180px; left: -120px; }
+    .blob.b2 { width: 540px; height: 540px; background: radial-gradient(circle, #fbcfe8, transparent 70%); top: 30%; right: -160px; animation-delay: -7s; }
+    .blob.b3 { width: 500px; height: 500px; background: radial-gradient(circle, #bae6fd, transparent 70%); bottom: -150px; left: 25%; animation-delay: -14s; }
+    @keyframes float {
+      0%,100% { transform: translate(0,0) scale(1); }
+      33% { transform: translate(60px,-50px) scale(1.1); }
+      66% { transform: translate(-40px,40px) scale(0.95); }
+    }
+
+    .content { position: relative; z-index: 2; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 3rem; height: 66px;
+      background: rgba(250,250,255,0.7);
+      backdrop-filter: blur(24px) saturate(180%);
+      -webkit-backdrop-filter: blur(24px) saturate(180%);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo { font-family: 'Space Grotesk', sans-serif; font-size: 0.95rem; font-weight: 700; letter-spacing: -0.01em; }
+    .nav-logo b { background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .nav-links { display: flex; gap: 0; list-style: none; }
+    .nav-links a {
+      color: var(--muted); text-decoration: none; font-size: 0.82rem; font-weight: 500;
+      padding: 0.4rem 0.9rem; border-radius: 8px; transition: all 0.15s;
+    }
+    .nav-links a:hover { color: var(--text); background: var(--pill); }
+    .nav-cta {
+      padding: 0.5rem 1.2rem; border-radius: 9px; font-size: 0.8rem; font-weight: 600;
+      text-decoration: none; color: #fff; background: var(--grad);
+      background-size: 150% 150%; transition: all 0.3s; cursor: pointer;
+      border: none; font-family: inherit;
+      box-shadow: 0 4px 16px rgba(109,94,247,0.3);
+    }
+    .nav-cta:hover { background-position: 100% 0; transform: translateY(-1px); }
+
+    /* ── CONTACT MODAL ── */
+    .modal { display: none; position: fixed; inset: 0; z-index: 600; align-items: center; justify-content: center; padding: 1.5rem; background: rgba(20,19,42,0.55); backdrop-filter: blur(8px); }
+    .modal.open { display: flex; animation: fadeIn 0.25s ease; }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    .modal-box {
+      width: 100%; max-width: 480px; background: rgba(255,255,255,0.96); backdrop-filter: blur(20px);
+      border: 1px solid var(--border2); border-radius: 22px; padding: 2.25rem 2.25rem 2rem;
+      box-shadow: var(--shadow-lg); position: relative; animation: popIn 0.3s cubic-bezier(.2,.8,.2,1);
+    }
+    @keyframes popIn { from { opacity: 0; transform: translateY(20px) scale(0.97); } to { opacity: 1; transform: none; } }
+    .modal-x { position: absolute; top: 1.1rem; right: 1.1rem; width: 32px; height: 32px; border-radius: 50%; background: var(--pill); border: none; color: var(--accent); font-size: 0.95rem; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 0.2s; }
+    .modal-x:hover { background: var(--border2); }
+    .modal-eyebrow { font-size: 0.66rem; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.4rem; }
+    .modal-title { font-family: 'Space Grotesk', sans-serif; font-size: 1.5rem; font-weight: 700; letter-spacing: -0.03em; margin-bottom: 0.4rem; }
+    .modal-desc { font-size: 0.85rem; color: var(--text2); margin-bottom: 1.6rem; }
+    .field { margin-bottom: 1rem; text-align: left; }
+    .field label { display: block; font-size: 0.74rem; font-weight: 600; color: var(--text2); margin-bottom: 0.4rem; }
+    .field label .req { color: var(--accent3); }
+    .field input, .field textarea {
+      width: 100%; font-family: inherit; font-size: 0.875rem; color: var(--text);
+      padding: 0.7rem 0.9rem; border: 1px solid var(--border2); border-radius: 10px;
+      background: rgba(250,250,255,0.8); transition: border-color 0.2s, box-shadow 0.2s; resize: vertical;
+    }
+    .field input:focus, .field textarea:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px rgba(109,94,247,0.14); }
+    .field textarea { min-height: 110px; }
+    .modal-actions { display: flex; gap: 0.6rem; margin-top: 1.4rem; }
+    .modal-actions .btn { flex: 1; justify-content: center; }
+    .modal-note { font-size: 0.7rem; color: var(--muted); text-align: center; margin-top: 0.9rem; }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh; display: flex; flex-direction: column;
+      align-items: center; justify-content: center; text-align: center;
+      padding: 9rem 2rem 6rem;
+    }
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: var(--glass); backdrop-filter: blur(10px);
+      border: 1px solid var(--border2);
+      color: var(--pill-text); border-radius: 100px; padding: 0.4rem 1.1rem;
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+      margin-bottom: 2rem; box-shadow: var(--shadow-sm);
+    }
+    .hero-eyebrow .spark { animation: spin 4s linear infinite; display: inline-block; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(3.4rem, 8vw, 7rem); font-weight: 700;
+      letter-spacing: -0.05em; line-height: 0.95; margin-bottom: 1.4rem;
+    }
+    h1 .shimmer {
+      background: linear-gradient(110deg, #6d5ef7, #a78bfa, #f472b6, #6d5ef7);
+      background-size: 250% auto;
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      animation: shimmer 6s linear infinite;
+    }
+    @keyframes shimmer { to { background-position: 250% center; } }
+
+    .hero-sub { font-size: 1.12rem; color: var(--text2); max-width: 520px; line-height: 1.7; margin-bottom: 2rem; }
+
+    /* skill tagline */
+    .skill-line {
+      display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center;
+      align-items: center; max-width: 760px; margin-bottom: 2.75rem;
+    }
+    .skill-grp {
+      display: flex; flex-wrap: wrap; gap: 0.4rem; justify-content: center;
+      padding: 0.4rem 0.85rem; border-radius: 100px;
+      background: var(--glass); backdrop-filter: blur(8px);
+      border: 1px solid var(--border); box-shadow: var(--shadow-sm);
+    }
+    .skill-grp .lead { font-size: 0.78rem; font-weight: 700; color: var(--accent); }
+    .skill-grp .it { font-size: 0.78rem; font-weight: 500; color: var(--text2); }
+    .skill-grp .it::before { content: '·'; color: var(--muted); margin-right: 0.4rem; }
+    .skill-grp .it:first-of-type::before { display: none; }
+
+    .hero-stats {
+      display: flex; margin-bottom: 3rem;
+      background: var(--glass); backdrop-filter: blur(14px);
+      border: 1px solid var(--border2); border-radius: 16px; overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+    .stat { padding: 1.3rem 2.4rem; text-align: center; border-right: 1px solid var(--border); }
+    .stat:last-child { border-right: none; }
+    .stat-num {
+      display: block; font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.85rem; font-weight: 700; letter-spacing: -0.03em; line-height: 1; margin-bottom: 0.3rem;
+      background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .stat-label { font-size: 0.7rem; color: var(--muted); font-weight: 500; }
+
+    .hero-actions { display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      padding: 0.75rem 1.6rem; border-radius: 11px; font-size: 0.875rem; font-weight: 600;
+      text-decoration: none; cursor: pointer; transition: all 0.25s;
+    }
+    .btn-primary { color: #fff; background: var(--grad); background-size: 150% 150%; border: none; box-shadow: 0 6px 22px rgba(109,94,247,0.34); }
+    .btn-primary:hover { background-position: 100% 0; transform: translateY(-2px); box-shadow: 0 10px 30px rgba(109,94,247,0.42); }
+    .btn-ghost { background: var(--glass); backdrop-filter: blur(8px); color: var(--text2); border: 1px solid var(--border2); box-shadow: var(--shadow-sm); }
+    .btn-ghost:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+    .btn-sm { padding: 0.5rem 1.05rem; font-size: 0.78rem; border-radius: 9px; }
+
+    /* ── LAYOUT ── */
+    .wrap { max-width: 1140px; margin: 0 auto; padding: 0 2.5rem; }
+    section { padding: 6rem 0; }
+    .section-header { margin-bottom: 3.5rem; }
+    .section-label { font-size: 0.68rem; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.6rem; }
+    .section-title { font-family: 'Space Grotesk', sans-serif; font-size: clamp(1.9rem, 3.2vw, 2.6rem); font-weight: 700; letter-spacing: -0.035em; line-height: 1.12; }
+
+    /* reveal */
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s cubic-bezier(.2,.7,.2,1), transform 0.7s cubic-bezier(.2,.7,.2,1); }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    /* ── SKILLS ── */
+    .skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 1rem; }
+    .skill-card {
+      background: var(--glass); backdrop-filter: blur(12px);
+      border: 1px solid var(--border); border-radius: 16px; padding: 1.5rem 1.6rem;
+      transition: all 0.3s; box-shadow: var(--shadow-sm); position: relative; overflow: hidden;
+    }
+    .skill-card::after {
+      content: ''; position: absolute; inset: 0; border-radius: 16px; padding: 1px;
+      background: var(--grad); -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor; mask-composite: exclude; opacity: 0; transition: opacity 0.3s;
+    }
+    .skill-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
+    .skill-card:hover::after { opacity: 1; }
+    .skill-card-label { font-size: 0.66rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.9rem; }
+    .skill-tags { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+    .stag { background: var(--pill); border: 1px solid var(--border); border-radius: 6px; padding: 0.2rem 0.55rem; font-size: 0.73rem; color: var(--text2); font-weight: 500; }
+
+    /* ── EXPERIENCE ── */
+    .exp-grid { display: flex; flex-direction: column; gap: 1rem; }
+    .exp-card {
+      background: var(--glass); backdrop-filter: blur(12px);
+      border: 1px solid var(--border); border-radius: 16px; padding: 1.85rem 2.1rem;
+      transition: all 0.3s; box-shadow: var(--shadow-sm);
+    }
+    .exp-card:hover { box-shadow: var(--shadow); transform: translateY(-2px); border-color: var(--border2); }
+    .exp-row { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.25rem; }
+    .exp-company { font-family: 'Space Grotesk', sans-serif; font-size: 1.1rem; font-weight: 600; letter-spacing: -0.02em; }
+    .exp-pill { font-size: 0.72rem; color: var(--muted); background: var(--pill); border: 1px solid var(--border); padding: 0.22rem 0.7rem; border-radius: 100px; white-space: nowrap; font-weight: 500; }
+    .exp-role { font-size: 0.85rem; color: var(--accent); font-weight: 600; margin-bottom: 0.2rem; }
+    .exp-meta { font-size: 0.78rem; color: var(--muted); margin-bottom: 1rem; }
+    .exp-tags { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+    .exp-tag { background: var(--pill); border: 1px solid var(--border); border-radius: 5px; padding: 0.18rem 0.5rem; font-size: 0.7rem; color: var(--text2); font-weight: 500; }
+
+    /* ── WRITING ── */
+    .articles-grid { display: grid; grid-template-columns: 1.6fr 1fr; gap: 1.25rem; }
+    .article-card {
+      display: flex; flex-direction: column;
+      background: var(--glass); backdrop-filter: blur(14px);
+      border: 1px solid var(--border); border-radius: 18px; padding: 2rem 2.1rem;
+      text-decoration: none; color: var(--text);
+      transition: all 0.3s; box-shadow: var(--shadow-sm); position: relative; overflow: hidden;
+    }
+    .article-card::after {
+      content: ''; position: absolute; inset: 0; border-radius: 18px; padding: 1px;
+      background: var(--grad); -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor; mask-composite: exclude; opacity: 0; transition: opacity 0.3s;
+    }
+    .article-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+    .article-card:hover::after { opacity: 1; }
+    .article-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.1rem; }
+    .article-badge { font-size: 0.7rem; font-weight: 700; color: var(--accent); background: var(--pill); border-radius: 100px; padding: 0.25rem 0.8rem; letter-spacing: 0.04em; }
+    .article-meta { font-size: 0.72rem; color: var(--muted); font-weight: 500; }
+    .article-title { font-family: 'Space Grotesk', sans-serif; font-size: 1.35rem; font-weight: 600; letter-spacing: -0.025em; line-height: 1.25; margin-bottom: 0.85rem; }
+    .article-excerpt { font-size: 0.88rem; color: var(--text2); line-height: 1.7; margin-bottom: 1.4rem; }
+    .article-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1.5rem; }
+    .atag { background: var(--pill); color: var(--pill-text); border-radius: 6px; padding: 0.22rem 0.6rem; font-size: 0.71rem; font-weight: 600; }
+    .article-cta { margin-top: auto; font-size: 0.85rem; font-weight: 700; background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .article-follow { background: linear-gradient(150deg, rgba(196,181,253,0.22), rgba(251,207,232,0.16)); align-items: flex-start; justify-content: center; }
+    .article-follow-inner { display: flex; flex-direction: column; }
+    .article-follow-icon { font-size: 2.2rem; margin-bottom: 0.75rem; }
+    .article-follow-title { font-family: 'Space Grotesk', sans-serif; font-size: 1.2rem; font-weight: 600; letter-spacing: -0.02em; margin-bottom: 0.5rem; }
+    .article-follow-desc { font-size: 0.85rem; color: var(--text2); line-height: 1.65; margin-bottom: 1.4rem; }
+
+    /* ── PROJECTS ── */
+    .projects-list { display: flex; flex-direction: column; gap: 3rem; }
+    .proj-card {
+      border: 1px solid var(--border); border-radius: 24px; overflow: hidden;
+      background: var(--glass); backdrop-filter: blur(16px);
+      box-shadow: var(--shadow); transition: all 0.35s; position: relative;
+    }
+    .proj-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-3px); border-color: var(--border2); }
+    .proj-top { display: grid; grid-template-columns: 1fr 1fr; }
+    .proj-top.flip { direction: rtl; }
+    .proj-top.flip > * { direction: ltr; }
+    .proj-info { padding: 3rem 2.85rem; display: flex; flex-direction: column; justify-content: center; }
+    .proj-num { font-family: 'Space Grotesk', sans-serif; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.75rem; }
+    .proj-title { font-family: 'Space Grotesk', sans-serif; font-size: 1.65rem; font-weight: 700; letter-spacing: -0.03em; line-height: 1.18; margin-bottom: 0.8rem; }
+    .proj-desc { font-size: 0.9rem; color: var(--text2); line-height: 1.75; margin-bottom: 1.5rem; }
+    .proj-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1.75rem; }
+    .ptag { background: var(--pill); color: var(--pill-text); border-radius: 6px; padding: 0.25rem 0.65rem; font-size: 0.71rem; font-weight: 600; }
+    .proj-metrics { display: flex; gap: 0.8rem; flex-wrap: wrap; margin-bottom: 1.75rem; }
+    .metric { background: rgba(255,255,255,0.6); border: 1px solid var(--border); border-radius: 11px; padding: 0.65rem 1rem; }
+    .metric-val { font-family: 'Space Grotesk', sans-serif; font-size: 1.15rem; font-weight: 700; letter-spacing: -0.03em; display: block; background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .metric-label { font-size: 0.67rem; color: var(--muted); font-weight: 500; }
+    .proj-actions { display: flex; gap: 0.6rem; }
+
+    /* gallery */
+    .proj-gallery { background: linear-gradient(160deg, rgba(196,181,253,0.18), rgba(251,207,232,0.12)); padding: 1.6rem; display: flex; flex-direction: column; gap: 0.75rem; border-left: 1px solid var(--border); }
+    .proj-top.flip .proj-gallery { border-left: none; border-right: 1px solid var(--border); }
+    .gallery-main { border-radius: 12px; overflow: hidden; cursor: zoom-in; box-shadow: var(--shadow); flex: 1; }
+    .gallery-main img { width: 100%; max-height: 300px; object-fit: cover; object-position: top; display: block; transition: transform 0.5s; }
+    .gallery-main:hover img { transform: scale(1.03); }
+    .gallery-thumbs { display: grid; grid-template-columns: repeat(auto-fill, minmax(66px, 1fr)); gap: 0.4rem; }
+    .thumb { border-radius: 8px; overflow: hidden; cursor: pointer; border: 2px solid transparent; opacity: 0.5; transition: all 0.2s; box-shadow: var(--shadow-sm); }
+    .thumb:hover { opacity: 0.85; }
+    .thumb.active { opacity: 1; border-color: var(--accent); }
+    .thumb img { width: 100%; height: 48px; object-fit: cover; object-position: top; display: block; }
+
+    /* ── ARCHITECTURE ── */
+    .arch {
+      border-top: 1px solid var(--border);
+      background: rgba(255,255,255,0.45);
+      padding: 1.75rem 2.85rem 2rem;
+    }
+    .arch-head { display: flex; align-items: center; gap: 0.6rem; margin-bottom: 1.4rem; }
+    .arch-head .lbl { font-size: 0.66rem; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); }
+    .arch-head .ln { flex: 1; height: 1px; background: linear-gradient(90deg, var(--border2), transparent); }
+    .flow { display: flex; align-items: stretch; flex-wrap: wrap; gap: 0; }
+    .node {
+      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.4rem;
+      background: var(--glass-solid); border: 1px solid var(--border2); border-radius: 13px;
+      padding: 0.75rem 0.85rem; min-width: 92px; text-align: center;
+      box-shadow: var(--shadow-sm); transition: all 0.25s; position: relative; z-index: 1;
+    }
+    .node:hover { transform: translateY(-3px); box-shadow: var(--shadow); border-color: var(--accent); }
+    .node .ic {
+      width: 34px; height: 34px; border-radius: 9px; display: flex; align-items: center; justify-content: center;
+      font-size: 1.05rem; background: var(--pill);
+    }
+    .node .nm { font-size: 0.7rem; font-weight: 600; color: var(--text); line-height: 1.2; }
+    .node .sub { font-size: 0.62rem; color: var(--muted); }
+    .conn { display: flex; align-items: center; min-width: 34px; flex: 0 0 auto; position: relative; }
+    .conn::before { content: ''; height: 2px; width: 100%; background: linear-gradient(90deg, var(--accent2), var(--accent)); border-radius: 2px; opacity: 0.45; }
+    .conn::after { content: ''; position: absolute; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 8px var(--accent); animation: flow 2.4s linear infinite; }
+    @keyframes flow { 0% { left: 0; opacity: 0; } 15% { opacity: 1; } 85% { opacity: 1; } 100% { left: calc(100% - 6px); opacity: 0; } }
+    .node.accent { background: linear-gradient(135deg, #6d5ef7, #a78bfa); border: none; }
+    .node.accent .nm { color: #fff; }
+    .node.accent .sub { color: rgba(255,255,255,0.8); }
+    .node.accent .ic { background: rgba(255,255,255,0.22); }
+    .arch-note { margin-top: 1rem; font-size: 0.72rem; color: var(--muted); display: flex; align-items: center; gap: 0.4rem; }
+    .arch-note b { color: var(--accent); font-weight: 600; }
+
+    /* ── AWARD ── */
+    .award-card { display: flex; align-items: center; gap: 1.75rem; background: linear-gradient(135deg, rgba(255,255,255,0.8), rgba(244,240,255,0.7)); backdrop-filter: blur(12px); border: 1px solid var(--border2); border-radius: 18px; padding: 2rem 2.25rem; box-shadow: var(--shadow); }
+    .award-icon { font-size: 2.8rem; flex-shrink: 0; }
+    .award-title { font-family: 'Space Grotesk', sans-serif; font-size: 1.15rem; font-weight: 600; margin-bottom: 0.2rem; }
+    .award-company { font-size: 0.82rem; color: var(--accent); font-weight: 600; margin-bottom: 0.3rem; }
+    .award-desc { font-size: 0.85rem; color: var(--text2); line-height: 1.6; }
+
+    /* ── CONTACT ── */
+    .contact-inner { max-width: 640px; margin: 0 auto; text-align: center; }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin: 2.5rem 0; text-align: left; }
+    .clink { display: flex; align-items: center; gap: 0.85rem; text-decoration: none; color: var(--text); padding: 1rem 1.25rem; background: var(--glass); backdrop-filter: blur(10px); border: 1px solid var(--border); border-radius: 13px; box-shadow: var(--shadow-sm); transition: all 0.2s; }
+    .clink:hover { border-color: var(--accent); box-shadow: var(--shadow); transform: translateY(-2px); }
+    .clink-icon { font-size: 1.2rem; flex-shrink: 0; }
+    .clink-label { font-size: 0.66rem; color: var(--muted); display: block; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; }
+    .clink-value { font-size: 0.82rem; font-weight: 600; }
+    .contact-footer { font-size: 0.8rem; color: var(--muted); }
+
+    /* ── LIGHTBOX ── */
+    .lb { display: none; position: fixed; inset: 0; z-index: 500; background: rgba(20,19,42,0.9); align-items: center; justify-content: center; padding: 2rem; backdrop-filter: blur(6px); }
+    .lb.open { display: flex; }
+    .lb img { max-width: 92vw; max-height: 90vh; border-radius: 14px; object-fit: contain; box-shadow: 0 30px 90px rgba(0,0,0,0.55); }
+    .lb-x { position: absolute; top: 1.5rem; right: 1.5rem; width: 42px; height: 42px; border-radius: 50%; background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.25); color: #fff; font-size: 1rem; cursor: pointer; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(8px); }
+    .lb-x:hover { background: rgba(255,255,255,0.25); }
+
+    footer { padding: 2.5rem; text-align: center; color: var(--muted); font-size: 0.8rem; border-top: 1px solid var(--border); }
+
+    @media (max-width: 820px) {
+      nav { padding: 0 1.25rem; }
+      .nav-links { display: none; }
+      .hero-stats { flex-direction: column; }
+      .stat { border-right: none; border-bottom: 1px solid var(--border); }
+      .stat:last-child { border-bottom: none; }
+      .proj-top, .proj-top.flip { grid-template-columns: 1fr; direction: ltr; }
+      .proj-top.flip .proj-gallery { border-right: none; border-top: 1px solid var(--border); }
+      .proj-gallery { border-left: none; border-top: 1px solid var(--border); }
+      .proj-info, .arch { padding-left: 1.75rem; padding-right: 1.75rem; }
+      .contact-grid { grid-template-columns: 1fr; }
+      .articles-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- MAGICAL BACKGROUND -->
+<div class="aurora">
+  <div class="blob b1"></div>
+  <div class="blob b2"></div>
+  <div class="blob b3"></div>
+</div>
+<canvas id="bg-canvas"></canvas>
+
+<div class="content">
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Neerali <b>Acharya</b></div>
+  <ul class="nav-links">
+    <li><a href="#writing">Writing</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#skills">Tools</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <button type="button" class="nav-cta" onclick="openContact()">Get in touch</button>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-eyebrow"><span class="spark">✦</span> Senior Backend &amp; Applied AI Engineer</div>
+  <h1><span class="shimmer">Neerali Acharya</span></h1>
+  <p class="hero-sub">7 years shipping production backend systems. I build AI that works at scale — not just in demos.</p>
+
+  <div class="skill-line">
+    <div class="skill-grp"><span class="lead">Backend &amp; AI</span></div>
+    <div class="skill-grp"><span class="it">AI Agents</span><span class="it">RAG</span><span class="it">LLM Integration</span></div>
+    <div class="skill-grp"><span class="it">Python</span><span class="it">AWS</span><span class="it">FastAPI</span><span class="it">ElasticSearch</span><span class="it">Vector DB</span><span class="it">Java</span></div>
+  </div>
+
+  <div class="hero-stats">
+    <div class="stat"><span class="stat-num">7+</span><span class="stat-label">Years Production</span></div>
+    <div class="stat"><span class="stat-num">3</span><span class="stat-label">AI Systems</span></div>
+    <div class="stat"><span class="stat-num">95%</span><span class="stat-label">SQL Cost Reduction</span></div>
+    <div class="stat"><span class="stat-num">71ms</span><span class="stat-label">Webhook ACK Median</span></div>
+  </div>
+
+  <div class="hero-actions">
+    <a href="#projects" class="btn btn-primary">View Projects ↓</a>
+    <a href="https://github.com/neeraliacharya" target="_blank" rel="noopener" class="btn btn-ghost">GitHub ↗</a>
+    <a href="https://linkedin.com/in/neeraliacharya" target="_blank" rel="noopener" class="btn btn-ghost">LinkedIn ↗</a>
+    <a href="https://medium.com/@neeraliacharya" target="_blank" rel="noopener" class="btn btn-ghost">Medium ↗</a>
+  </div>
+</section>
+
+<!-- WRITING -->
+<section id="writing">
+  <div class="wrap">
+    <div class="section-header reveal">
+      <div class="section-label">Writing</div>
+      <h2 class="section-title">From the trenches</h2>
+    </div>
+    <div class="articles-grid">
+
+      <a href="https://medium.com/@neeraliacharya/i-built-a-rag-pipeline-then-reality-hit-heres-every-problem-i-solved-a8633f4b572b" target="_blank" rel="noopener" class="article-card reveal">
+        <div class="article-top">
+          <span class="article-badge">✦ Medium</span>
+          <span class="article-meta">6 min read</span>
+        </div>
+        <h3 class="article-title">I Built a RAG Pipeline. Then Reality Hit. Here's Every Problem I Solved</h3>
+        <p class="article-excerpt">The three production bugs no RAG tutorial warns you about — non-deterministic outputs, hallucination, and context loss in multi-turn chats — and exactly how I fixed each one.</p>
+        <div class="article-tags"><span class="atag">RAG</span><span class="atag">LLM</span><span class="atag">Hallucination</span><span class="atag">Vector Search</span><span class="atag">Prompt Engineering</span></div>
+        <span class="article-cta">Read on Medium →</span>
+      </a>
+
+      <a href="https://medium.com/@neeraliacharya" target="_blank" rel="noopener" class="article-card article-follow reveal">
+        <div class="article-follow-inner">
+          <div class="article-follow-icon">✍️</div>
+          <div class="article-follow-title">More on Medium</div>
+          <div class="article-follow-desc">I write about applied AI, RAG, agentic systems, and the engineering reality behind shipping LLMs to production.</div>
+          <span class="article-cta">Follow @neeraliacharya →</span>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="wrap" style="max-width:1180px">
+    <div class="section-header reveal">
+      <div class="section-label">Projects</div>
+      <h2 class="section-title">AI systems</h2>
+    </div>
+
+    <div class="projects-list">
+
+      <!-- 01 -->
+      <div class="proj-card reveal">
+        <div class="proj-top">
+          <div class="proj-info">
+            <div class="proj-num">01 / 03</div>
+            <h3 class="proj-title">Solstice Pilates<br>AI Voice Agent</h3>
+            <p class="proj-desc">Autonomous AI receptionist for a Pilates studio — handles inbound voice calls, bookings, rescheduling, and pricing. Built with a 4-model LLM fallback chain for uninterrupted service under API failures.</p>
+            <div class="proj-tags"><span class="ptag">Python</span><span class="ptag">FastAPI</span><span class="ptag">Vapi</span><span class="ptag">Groq</span><span class="ptag">Gemini 2.0 Flash</span><span class="ptag">Google Calendar API</span><span class="ptag">Google Sheets API</span><span class="ptag">SSE</span><span class="ptag">Gradio</span></div>
+            <div class="proj-metrics">
+              <div class="metric"><span class="metric-val">4</span><span class="metric-label">LLM Fallback Chain</span></div>
+              <div class="metric"><span class="metric-val">10</span><span class="metric-label">Function Tools</span></div>
+              <div class="metric"><span class="metric-val">≤1.5s</span><span class="metric-label">Filler SLA</span></div>
+            </div>
+            <div class="proj-actions"><a href="https://github.com/neeraliacharya/solstice-pilates-ai-receptionist" target="_blank" rel="noopener" class="btn btn-ghost btn-sm">GitHub ↗</a></div>
+          </div>
+          <div class="proj-gallery">
+            <div class="gallery-main"><img id="mi-1" src="images/AI Receptionist ChatBot 1.png" alt="Solstice Pilates chatbot" /></div>
+            <div class="gallery-thumbs">
+              <div class="thumb active" onclick="sw('mi-1',this,'images/AI Receptionist ChatBot 1.png')"><img src="images/AI Receptionist ChatBot 1.png" alt="" /></div>
+              <div class="thumb" onclick="sw('mi-1',this,'images/AI Receptionist ChatBot 2.png')"><img src="images/AI Receptionist ChatBot 2.png" alt="" /></div>
+              <div class="thumb" onclick="sw('mi-1',this,'images/AI receptionist web call 1.png')"><img src="images/AI receptionist web call 1.png" alt="" /></div>
+              <div class="thumb" onclick="sw('mi-1',this,'images/AI receptionist web call 2.png')"><img src="images/AI receptionist web call 2.png" alt="" /></div>
+              <div class="thumb" onclick="sw('mi-1',this,'images/AI Receptionist Calendar.png')"><img src="images/AI Receptionist Calendar.png" alt="" /></div>
+              <div class="thumb" onclick="sw('mi-1',this,'images/AI receptionist Booking Sheet.png')"><img src="images/AI receptionist Booking Sheet.png" alt="" /></div>
+              <div class="thumb" onclick="sw('mi-1',this,'images/AI receptionist Call log sheet.png')"><img src="images/AI receptionist Call log sheet.png" alt="" /></div>
+            </div>
+          </div>
+        </div>
+        <div class="arch">
+          <div class="arch-head"><span class="lbl">⚙ Architecture</span><span class="ln"></span></div>
+          <div class="flow">
+            <div class="node"><div class="ic">📞</div><div class="nm">Caller</div><div class="sub">Inbound</div></div>
+            <div class="conn"></div>
+            <div class="node"><div class="ic">🎙️</div><div class="nm">Vapi</div><div class="sub">STT / TTS</div></div>
+            <div class="conn"></div>
+            <div class="node accent"><div class="ic">⚡</div><div class="nm">FastAPI</div><div class="sub">asyncio · SSE</div></div>
+            <div class="conn"></div>
+            <div class="node"><div class="ic">🔀</div><div class="nm">LLM Fallback</div><div class="sub">Qwen→Gemini→Llama</div></div>
+            <div class="conn"></div>
+            <div class="node"><div class="ic">🛠️</div><div class="nm">Function Calls</div><div class="sub">10 tools</div></div>
+            <div class="conn"></div>
+            <div class="node"><div class="ic">📅</div><div class="nm">Calendar API</div><div class="sub">Atomic booking</div></div>
+            <div class="conn"></div>
+            <div class="node"><div class="ic">📊</div><div class="nm">Sheets CRM</div><div class="sub">Call logging</div></div>
+          </div>
+          <div class="arch-note">↳ <b>Resilience:</b> spoken fillers at each model switch, empty-response retry, rate-limit detection &amp; human-agent escalation.</div>
+        </div>
+      </div>
+
+      <!-- 02 -->
+      <div class="proj-card reveal">
+        <div class="proj-top flip">
+          <div class="proj-info">
+            <div class="proj-num">02 / 03</div>
+            <h3 class="proj-title">AI Doc Assist —<br>Knowledge Assistant</h3>
+            <p class="proj-desc">Production-grade RAG platform for internal documentation. Upload any PDF, query it conversationally — every answer is grounded with doc name + page-level source traceability.</p>
+            <div class="proj-tags"><span class="ptag">Python</span><span class="ptag">FastAPI</span><span class="ptag">LangChain</span><span class="ptag">Sentence Transformers</span><span class="ptag">Cross-Encoder Re-ranking</span><span class="ptag">Groq</span><span class="ptag">Pinecone</span><span class="ptag">FAISS</span><span class="ptag">AWS S3/SQS</span><span class="ptag">React 18</span></div>
+            <div class="proj-metrics">
+              <div class="metric"><span class="metric-val">500+</span><span class="metric-label">Docs Indexed</span></div>
+              <div class="metric"><span class="metric-val">&lt;1s</span><span class="metric-label">vs 15–30 min</span></div>
+              <div class="metric"><span class="metric-val">202</span><span class="metric-label">Instant Accept</span></div>
+            </div>
+          </div>
+          <div class="proj-gallery">
+            <div class="gallery-main"><img id="mi-2" src="images/AI knowlege assistant 1.png" alt="Knowledge Assistant" /></div>
+            <div class="gallery-thumbs">
+              <div class="thumb active" onclick="sw('mi-2',this,'images/AI knowlege assistant 1.png')"><img src="images/AI knowlege assistant 1.png" alt="" /></div>
+              <div class="thumb" onclick="sw('mi-2',this,'images/AI knowlege assistant 2.png')"><img src="images/AI knowlege assistant 2.png" alt="" /></div>
+            </div>
+          </div>
+        </div>
+        <div class="arch">
+          <div class="arch-head"><span class="lbl">⚙ Architecture</span><span class="ln"></span></div>
+          <div class="flow">
+            <div class="node"><div class="ic">📄</div><div class="nm">PDF Upload</div><div class="sub">React 18</div></div>
+            <div class="conn"></div>
+            <div class="node"><div class="ic">☁️</div><div class="nm">AWS S3</div><div class="sub">Object store</div></div>
+            <div class="conn"></div>
+            <div class="node"><div class="ic">📬</div><div class="nm">SQS + DLQ</div><div class="sub">Async queue</div></div>
+            <div class="conn"></div>
+            <div class="node"><div class="ic">⚙️</div><div class="nm">Worker</div><div class="sub">Chunk + Embed</div></div>
+            <div class="conn"></div>
+            <div class="node"><div class="ic">🧮</div><div class="nm">FAISS / Pinecone</div><div class="sub">Vector index</div></div>
+            <div class="conn"></div>
+            <div class="node"><div class="ic">🔎</div><div class="nm">Re-ranking</div><div class="sub">Cross-Encoder</div></div>
+            <div class="conn"></div>
+            <div class="node accent"><div class="ic">🤖</div><div class="nm">Groq LLM</div><div class="sub">Grounded answer</div></div>
+          </div>
+          <div class="arch-note">↳ <b>Lifecycle:</b> DynamoDB tracks pending → processing → ready → failed; full per-query observability on latency &amp; re-rank scores.</div>
+        </div>
+      </div>
+
+      <!-- 03 -->
+      <div class="proj-card reveal">
+        <div class="proj-top">
+          <div class="proj-info">
+            <div class="proj-num">03 / 03</div>
+            <h3 class="proj-title">AI Webhook<br>Ingestion Agent</h3>
+            <p class="proj-desc">Real-time supply chain normaliser. Ingests raw webhook events from logistics providers, classifies them with LLMs, and writes typed schemas to PostgreSQL — all under 100ms vendor ACK.</p>
+            <div class="proj-tags"><span class="ptag">Python</span><span class="ptag">FastAPI</span><span class="ptag">SQLAlchemy async</span><span class="ptag">PostgreSQL</span><span class="ptag">Pydantic v2</span><span class="ptag">asyncio.Queue</span><span class="ptag">Groq</span><span class="ptag">Gemini</span><span class="ptag">Anthropic Claude</span><span class="ptag">Docker</span></div>
+            <div class="proj-metrics">
+              <div class="metric"><span class="metric-val">71ms</span><span class="metric-label">Median ACK</span></div>
+              <div class="metric"><span class="metric-val">21</span><span class="metric-label">Tests Shipped</span></div>
+              <div class="metric"><span class="metric-val">3s</span><span class="metric-label">Dashboard Refresh</span></div>
+            </div>
+            <div class="proj-actions"><a href="https://github.com/neeraliacharya/ai-webhook-ingestion-service" target="_blank" rel="noopener" class="btn btn-ghost btn-sm">GitHub ↗</a></div>
+          </div>
+          <div class="proj-gallery">
+            <div class="gallery-main"><img id="mi-3" src="images/AI webhook ingestion 1.png" alt="Webhook ingestion dashboard" /></div>
+            <div class="gallery-thumbs">
+              <div class="thumb active" onclick="sw('mi-3',this,'images/AI webhook ingestion 1.png')"><img src="images/AI webhook ingestion 1.png" alt="" /></div>
+              <div class="thumb" onclick="sw('mi-3',this,'images/AI webhook ingestion 2.png')"><img src="images/AI webhook ingestion 2.png" alt="" /></div>
+              <div class="thumb" onclick="sw('mi-3',this,'images/AI webhook ingestion 3.png')"><img src="images/AI webhook ingestion 3.png" alt="" /></div>
+              <div class="thumb" onclick="sw('mi-3',this,'images/AI webhook ingestion 4.png')"><img src="images/AI webhook ingestion 4.png" alt="" /></div>
+              <div class="thumb" onclick="sw('mi-3',this,'images/AI webhook ingestion 5.png')"><img src="images/AI webhook ingestion 5.png" alt="" /></div>
+            </div>
+          </div>
+        </div>
+        <div class="arch">
+          <div class="arch-head"><span class="lbl">⚙ Architecture</span><span class="ln"></span></div>
+          <div class="flow">
+            <div class="node"><div class="ic">🪝</div><div class="nm">Vendor Webhook</div><div class="sub">Maersk · GFP</div></div>
+            <div class="conn"></div>
+            <div class="node accent"><div class="ic">⚡</div><div class="nm">FastAPI 202</div><div class="sub">71ms ACK</div></div>
+            <div class="conn"></div>
+            <div class="node"><div class="ic">🧵</div><div class="nm">asyncio.Queue</div><div class="sub">Decoupled</div></div>
+            <div class="conn"></div>
+            <div class="node"><div class="ic">🧠</div><div class="nm">LLM Normalize</div><div class="sub">Groq/Gemini/Claude</div></div>
+            <div class="conn"></div>
+            <div class="node"><div class="ic">✅</div><div class="nm">Pydantic v2</div><div class="sub">Typed schema</div></div>
+            <div class="conn"></div>
+            <div class="node"><div class="ic">🐘</div><div class="nm">PostgreSQL</div><div class="sub">SQLAlchemy</div></div>
+            <div class="conn"></div>
+            <div class="node"><div class="ic">📊</div><div class="nm">Dashboard</div><div class="sub">Auto-refresh 3s</div></div>
+          </div>
+          <div class="arch-note">↳ <b>Exactly-once:</b> dual-layer dedup (vendor idempotency key + SHA-256 payload hash) — no application-level locking.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- TOOLS / SKILLS -->
+<section id="skills">
+  <div class="wrap">
+    <div class="section-header reveal">
+      <div class="section-label">Tools</div>
+      <h2 class="section-title">What I work with</h2>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-card reveal"><div class="skill-card-label">Languages</div><div class="skill-tags"><span class="stag">Python</span><span class="stag">Java</span><span class="stag">JavaScript</span><span class="stag">PL/SQL</span></div></div>
+      <div class="skill-card reveal"><div class="skill-card-label">AI / ML</div><div class="skill-tags"><span class="stag">RAG</span><span class="stag">LangChain</span><span class="stag">Vector Search</span><span class="stag">Prompt Engineering</span><span class="stag">Agentic Workflows</span><span class="stag">Function Calling</span></div></div>
+      <div class="skill-card reveal"><div class="skill-card-label">LLMs &amp; Frameworks</div><div class="skill-tags"><span class="stag">Groq API</span><span class="stag">Anthropic Claude</span><span class="stag">Gemini 2.0 Flash</span><span class="stag">Qwen / LLaMA</span><span class="stag">Vapi</span><span class="stag">Sentence Transformers</span><span class="stag">Ollama</span></div></div>
+      <div class="skill-card reveal"><div class="skill-card-label">Backend &amp; APIs</div><div class="skill-tags"><span class="stag">FastAPI</span><span class="stag">Spring Boot</span><span class="stag">Node.js</span><span class="stag">SSE</span><span class="stag">Webhooks</span><span class="stag">SQLAlchemy</span></div></div>
+      <div class="skill-card reveal"><div class="skill-card-label">Databases &amp; Vector DB</div><div class="skill-tags"><span class="stag">Pinecone</span><span class="stag">FAISS</span><span class="stag">Elasticsearch</span><span class="stag">PostgreSQL</span><span class="stag">MySQL</span><span class="stag">Redis</span><span class="stag">DynamoDB</span></div></div>
+      <div class="skill-card reveal"><div class="skill-card-label">Cloud &amp; DevOps</div><div class="skill-tags"><span class="stag">AWS S3</span><span class="stag">SQS</span><span class="stag">Lambda</span><span class="stag">EC2</span><span class="stag">Kinesis</span><span class="stag">Step Functions</span><span class="stag">Docker</span><span class="stag">Jenkins</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- AWARD -->
+<section>
+  <div class="wrap">
+    <div class="section-header reveal">
+      <div class="section-label">Recognition</div>
+      <h2 class="section-title">Awards</h2>
+    </div>
+    <div class="award-card reveal">
+      <div class="award-icon">🏆</div>
+      <div>
+        <div class="award-title">Rising Star Award</div>
+        <div class="award-company">QMetry India Pvt. Ltd.</div>
+        <div class="award-desc">Awarded within 3 months of joining for outstanding performance, fast adaptation, and measurable 30–40% API performance improvement across core endpoints.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="wrap">
+    <div class="contact-inner reveal">
+      <div class="section-label" style="text-align:center">Contact</div>
+      <h2 class="section-title" style="text-align:center;margin-bottom:0.75rem">Let's connect</h2>
+      <p style="color:var(--text2);font-size:0.9rem;margin-bottom:1.5rem">Open to senior AI and backend engineering opportunities.</p>
+      <button type="button" class="btn btn-primary" onclick="openContact()">✦ Send me a message</button>
+      <div class="contact-grid">
+        <a href="mailto:niralinacharya@gmail.com" class="clink"><span class="clink-icon">✉️</span><div><span class="clink-label">Email</span><span class="clink-value">niralinacharya@gmail.com</span></div></a>
+        <a href="https://linkedin.com/in/neeraliacharya" target="_blank" rel="noopener" class="clink"><span class="clink-icon">💼</span><div><span class="clink-label">LinkedIn</span><span class="clink-value">linkedin.com/in/neeraliacharya</span></div></a>
+        <a href="https://github.com/neeraliacharya" target="_blank" rel="noopener" class="clink"><span class="clink-icon">🐙</span><div><span class="clink-label">GitHub</span><span class="clink-value">github.com/neeraliacharya</span></div></a>
+        <a href="https://medium.com/@neeraliacharya" target="_blank" rel="noopener" class="clink"><span class="clink-icon">✍️</span><div><span class="clink-label">Medium</span><span class="clink-value">medium.com/@neeraliacharya</span></div></a>
+      </div>
+      <div class="contact-footer">📍 Gujarat, India</div>
+    </div>
+  </div>
+</section>
+
+<footer><p>© 2026 Neerali Acharya &nbsp;·&nbsp; Senior Backend &amp; Applied AI Engineer</p></footer>
+
+</div><!-- /content -->
+
+<!-- CONTACT MODAL -->
+<div class="modal" id="contactModal" onclick="if(event.target===this)closeContact()">
+  <div class="modal-box">
+    <button type="button" class="modal-x" onclick="closeContact()">✕</button>
+    <div class="modal-eyebrow">✦ Get in touch</div>
+    <div class="modal-title">Send me a message</div>
+    <div class="modal-desc">Fill this in and it'll open your email app, pre-addressed to me.</div>
+    <form onsubmit="return sendContact(event)">
+      <div class="field">
+        <label for="cf-name">Your name</label>
+        <input id="cf-name" type="text" placeholder="Jane Doe" autocomplete="name" />
+      </div>
+      <div class="field">
+        <label for="cf-email">Your email</label>
+        <input id="cf-email" type="email" placeholder="jane@company.com" autocomplete="email" />
+      </div>
+      <div class="field">
+        <label for="cf-title">Title <span class="req">*</span></label>
+        <input id="cf-title" type="text" required placeholder="e.g. Senior AI Engineer opportunity" />
+      </div>
+      <div class="field">
+        <label for="cf-details">Details <span class="req">*</span></label>
+        <textarea id="cf-details" required placeholder="Tell me a bit about the role, project, or question…"></textarea>
+      </div>
+      <div class="modal-actions">
+        <button type="button" class="btn btn-ghost" onclick="closeContact()">Cancel</button>
+        <button type="submit" class="btn btn-primary">Send message →</button>
+      </div>
+      <div class="modal-note">Sends to niralinacharya@gmail.com via your email client</div>
+    </form>
+  </div>
+</div>
+
+<!-- LIGHTBOX -->
+<div class="lb" id="lb" onclick="closeLb()">
+  <button class="lb-x" onclick="closeLb()">✕</button>
+  <img id="lb-img" src="" alt="" onclick="event.stopPropagation()" />
+</div>
+
+<script>
+  // gallery switch
+  function sw(imgId, thumbEl, src) {
+    document.getElementById(imgId).src = src;
+    thumbEl.closest('.proj-gallery').querySelectorAll('.thumb').forEach(t => t.classList.remove('active'));
+    thumbEl.classList.add('active');
+  }
+  document.querySelectorAll('.gallery-main').forEach(el => {
+    el.addEventListener('click', () => openLb(el.querySelector('img').src));
+  });
+  function openLb(src){ document.getElementById('lb-img').src = src; document.getElementById('lb').classList.add('open'); document.body.style.overflow='hidden'; }
+  function closeLb(){ document.getElementById('lb').classList.remove('open'); document.body.style.overflow=''; }
+
+  // contact modal
+  function openContact(){ document.getElementById('contactModal').classList.add('open'); document.body.style.overflow='hidden'; setTimeout(()=>document.getElementById('cf-title').focus(),120); }
+  function closeContact(){ document.getElementById('contactModal').classList.remove('open'); document.body.style.overflow=''; }
+  function sendContact(e){
+    e.preventDefault();
+    const name = document.getElementById('cf-name').value.trim();
+    const email = document.getElementById('cf-email').value.trim();
+    const title = document.getElementById('cf-title').value.trim();
+    const details = document.getElementById('cf-details').value.trim();
+    const subject = title + ' — via Personal Website';
+    let body = details + '\n\n';
+    body += '—————————————\n';
+    body += 'Sent from Neerali Acharya’s personal website\n';
+    if (name)  body += 'From: ' + name + '\n';
+    if (email) body += 'Reply-to: ' + email + '\n';
+    const mailto = 'mailto:niralinacharya@gmail.com'
+      + '?subject=' + encodeURIComponent(subject)
+      + '&body='    + encodeURIComponent(body);
+    window.location.href = mailto;
+    closeContact();
+    return false;
+  }
+
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeLb(); closeContact(); } });
+
+  // scroll reveal
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  // ── DYNAMIC ARCHITECTURE NODE-NETWORK BACKGROUND ──
+  const canvas = document.getElementById('bg-canvas');
+  const ctx = canvas.getContext('2d');
+  let w, h, nodes = [];
+  const COUNT = 64;
+  function resize() {
+    w = canvas.width = window.innerWidth;
+    h = canvas.height = window.innerHeight;
+  }
+  function init() {
+    nodes = [];
+    for (let i = 0; i < COUNT; i++) {
+      nodes.push({
+        x: Math.random()*w, y: Math.random()*h,
+        vx: (Math.random()-0.5)*0.28, vy: (Math.random()-0.5)*0.28,
+        r: Math.random()*1.8 + 1
+      });
+    }
+  }
+  function draw() {
+    ctx.clearRect(0,0,w,h);
+    for (let i = 0; i < nodes.length; i++) {
+      const n = nodes[i];
+      n.x += n.vx; n.y += n.vy;
+      if (n.x < 0 || n.x > w) n.vx *= -1;
+      if (n.y < 0 || n.y > h) n.vy *= -1;
+      // connections
+      for (let j = i+1; j < nodes.length; j++) {
+        const m = nodes[j];
+        const dx = n.x-m.x, dy = n.y-m.y;
+        const dist = Math.sqrt(dx*dx+dy*dy);
+        if (dist < 150) {
+          const a = (1 - dist/150) * 0.16;
+          ctx.strokeStyle = `rgba(120,100,230,${a})`;
+          ctx.lineWidth = 1;
+          ctx.beginPath(); ctx.moveTo(n.x,n.y); ctx.lineTo(m.x,m.y); ctx.stroke();
+        }
+      }
+    }
+    // nodes
+    for (const n of nodes) {
+      ctx.fillStyle = 'rgba(140,120,240,0.35)';
+      ctx.beginPath(); ctx.arc(n.x,n.y,n.r,0,Math.PI*2); ctx.fill();
+    }
+    requestAnimationFrame(draw);
+  }
+  window.addEventListener('resize', () => { resize(); init(); });
+  resize(); init(); draw();
+</script>
+
+</body>
+</html>
