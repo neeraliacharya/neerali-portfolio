@@ -300,9 +300,20 @@
     /* gallery */
     .proj-gallery { background: linear-gradient(160deg, rgba(196,181,253,0.18), rgba(251,207,232,0.12)); padding: 1.6rem; display: flex; flex-direction: column; gap: 0.75rem; border-left: 1px solid var(--border); }
     .proj-top.flip .proj-gallery { border-left: none; border-right: 1px solid var(--border); }
-    .gallery-main { border-radius: 12px; overflow: hidden; cursor: zoom-in; box-shadow: var(--shadow); flex: 1; }
-    .gallery-main img { width: 100%; max-height: 300px; object-fit: cover; object-position: top; display: block; transition: transform 0.5s; }
+    .gallery-main { position: relative; border-radius: 12px; overflow: hidden; cursor: zoom-in; box-shadow: var(--shadow); flex: 1; }
+    .gallery-main img { width: 100%; max-height: 300px; object-fit: cover; object-position: top; display: block; transition: transform 0.5s, opacity 0.4s ease; }
     .gallery-main:hover img { transform: scale(1.03); }
+    .gallery-main.fading img { opacity: 0; }
+    /* slideshow controls */
+    .gnav { position: absolute; top: 50%; transform: translateY(-50%); width: 34px; height: 34px; border-radius: 50%; border: none; background: rgba(255,255,255,0.82); backdrop-filter: blur(6px); color: var(--accent); font-size: 1.15rem; line-height: 1; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: var(--shadow-sm); opacity: 0; transition: opacity 0.22s, background 0.2s, transform 0.2s; z-index: 3; }
+    .gallery-main:hover .gnav { opacity: 1; }
+    .gnav:hover { background: #fff; }
+    .gnav.prev { left: 10px; } .gnav.next { right: 10px; }
+    .gcount { position: absolute; bottom: 10px; right: 10px; background: rgba(20,19,42,0.62); color: #fff; font-size: 0.67rem; font-weight: 600; letter-spacing: 0.03em; padding: 0.22rem 0.65rem; border-radius: 100px; backdrop-filter: blur(6px); z-index: 3; pointer-events: none; }
+    .gbar { position: absolute; left: 0; bottom: 0; height: 3px; width: 100%; background: rgba(255,255,255,0.25); z-index: 3; pointer-events: none; }
+    .gbar i { display: block; height: 100%; width: 0; background: var(--grad); }
+    .gbar.run i { animation: gprog linear forwards; }
+    @keyframes gprog { from { width: 0; } to { width: 100%; } }
     .gallery-thumbs { display: grid; grid-template-columns: repeat(auto-fill, minmax(66px, 1fr)); gap: 0.4rem; }
     .thumb { border-radius: 8px; overflow: hidden; cursor: pointer; border: 2px solid transparent; opacity: 0.5; transition: all 0.2s; box-shadow: var(--shadow-sm); }
     .thumb:hover { opacity: 0.85; }
@@ -416,13 +427,13 @@
 
   <div class="skill-line">
     <div class="skill-grp"><span class="lead">Backend &amp; AI</span></div>
-    <div class="skill-grp"><span class="it">AI Agents</span><span class="it">RAG</span><span class="it">LLM Integration</span><span class="it">Voice Assistants</span></div>
-    <div class="skill-grp"><span class="it">Python</span><span class="it">AWS</span><span class="it">FastAPI</span><span class="it">ElasticSearch</span><span class="it">Vector DB</span><span class="it">Java</span><span class="it">Vapi</span><span class="it">SQL</span></div>
+    <div class="skill-grp"><span class="it">AI Agents</span><span class="it">RAG</span><span class="it">LLM Integration</span></div>
+    <div class="skill-grp"><span class="it">Python</span><span class="it">AWS</span><span class="it">FastAPI</span><span class="it">ElasticSearch</span><span class="it">Vector DB</span><span class="it">Java</span><span class="it">Vapi</span><span class="it">React</span><span class="it">Docker</span><span class="it">Streamlit</span></div>
   </div>
 
   <div class="hero-stats">
     <div class="stat"><span class="stat-num">7+</span><span class="stat-label">Years Production</span></div>
-    <div class="stat"><span class="stat-num">3</span><span class="stat-label">AI Systems</span></div>
+    <div class="stat"><span class="stat-num">4</span><span class="stat-label">AI Systems</span></div>
     <div class="stat"><span class="stat-num">95%</span><span class="stat-label">SQL Cost Reduction</span></div>
     <div class="stat"><span class="stat-num">71ms</span><span class="stat-label">Webhook ACK Median</span></div>
   </div>
@@ -482,8 +493,8 @@
       <div class="proj-card reveal">
         <div class="proj-top">
           <div class="proj-info">
-            <div class="proj-num">01 / 03</div>
-            <h3 class="proj-title">Solstice Pilates<br>AI Voice Agent</h3>
+            <div class="proj-num">01 / 04</div>
+            <h3 class="proj-title">AI Receptionist<br>Chat and Voice Agent</h3>
             <p class="proj-desc">Autonomous AI receptionist for a Pilates studio — handles inbound voice calls, bookings, rescheduling, and pricing. Built with a 4-model LLM fallback chain for uninterrupted service under API failures.</p>
             <div class="proj-tags"><span class="ptag">Python</span><span class="ptag">FastAPI</span><span class="ptag">Vapi</span><span class="ptag">Groq</span><span class="ptag">Gemini 2.0 Flash</span><span class="ptag">Google Calendar API</span><span class="ptag">Google Sheets API</span><span class="ptag">SSE</span><span class="ptag">Gradio</span></div>
             <div class="proj-metrics">
@@ -491,7 +502,7 @@
               <div class="metric"><span class="metric-val">10</span><span class="metric-label">Function Tools</span></div>
               <div class="metric"><span class="metric-val">≤1.5s</span><span class="metric-label">Filler SLA</span></div>
             </div>
-            <div class="proj-actions"><a href="https://github.com/neeraliacharya/solstice-pilates-ai-receptionist" target="_blank" rel="noopener" class="btn btn-ghost btn-sm">GitHub ↗</a></div>
+            <div class="proj-actions"><a href="https://github.com/neeraliacharya/ai-receptionist-chat-and-voice" target="_blank" rel="noopener" class="btn btn-ghost btn-sm">GitHub ↗</a></div>
           </div>
           <div class="proj-gallery">
             <div class="gallery-main"><img id="mi-1" src="images/AI Receptionist ChatBot 1.png" alt="Solstice Pilates chatbot" /></div>
@@ -531,7 +542,7 @@
       <div class="proj-card reveal">
         <div class="proj-top flip">
           <div class="proj-info">
-            <div class="proj-num">02 / 03</div>
+            <div class="proj-num">02 / 04</div>
             <h3 class="proj-title">AI Doc Assist —<br>Knowledge Assistant</h3>
             <p class="proj-desc">Production-grade RAG platform for internal documentation. Upload any PDF, query it conversationally — every answer is grounded with doc name + page-level source traceability.</p>
             <div class="proj-tags"><span class="ptag">Python</span><span class="ptag">FastAPI</span><span class="ptag">LangChain</span><span class="ptag">Sentence Transformers</span><span class="ptag">Cross-Encoder Re-ranking</span><span class="ptag">Groq</span><span class="ptag">Pinecone</span><span class="ptag">FAISS</span><span class="ptag">AWS S3/SQS</span><span class="ptag">React 18</span></div>
@@ -574,7 +585,7 @@
       <div class="proj-card reveal">
         <div class="proj-top">
           <div class="proj-info">
-            <div class="proj-num">03 / 03</div>
+            <div class="proj-num">03 / 04</div>
             <h3 class="proj-title">AI Webhook<br>Ingestion Agent</h3>
             <p class="proj-desc">Real-time supply chain normaliser. Ingests raw webhook events from logistics providers, classifies them with LLMs, and writes typed schemas to PostgreSQL — all under 100ms vendor ACK.</p>
             <div class="proj-tags"><span class="ptag">Python</span><span class="ptag">FastAPI</span><span class="ptag">SQLAlchemy async</span><span class="ptag">PostgreSQL</span><span class="ptag">Pydantic v2</span><span class="ptag">asyncio.Queue</span><span class="ptag">Groq</span><span class="ptag">Gemini</span><span class="ptag">Anthropic Claude</span><span class="ptag">Docker</span></div>
@@ -614,6 +625,60 @@
             <div class="node"><div class="ic">📊</div><div class="nm">Dashboard</div><div class="sub">Auto-refresh 3s</div></div>
           </div>
           <div class="arch-note">↳ <b>Exactly-once:</b> dual-layer dedup (vendor idempotency key + SHA-256 payload hash) — no application-level locking.</div>
+        </div>
+      </div>
+
+
+      <!-- 04 -->
+      <div class="proj-card reveal">
+        <div class="proj-top flip">
+          <div class="proj-info">
+            <div class="proj-num">04 / 04</div>
+            <h3 class="proj-title">LLM-Powered<br>Resume Parser</h3>
+            <p class="proj-desc">Structured data extraction from PDF and DOCX resumes using a multi-provider LLM backend. Pre-processes documents with regex URL detection before LLM ingestion, implements self-repair retry on malformed JSON, and exposes results via FastAPI REST and a Streamlit UI — no external infrastructure required.</p>
+            <div class="proj-tags"><span class="ptag">Python</span><span class="ptag">FastAPI</span><span class="ptag">Streamlit</span><span class="ptag">Pydantic v2</span><span class="ptag">PyMuPDF</span><span class="ptag">python-docx</span><span class="ptag">Groq</span><span class="ptag">Gemini</span><span class="ptag">Anthropic Claude</span><span class="ptag">SQLite</span><span class="ptag">pytest</span></div>
+            <div class="proj-metrics">
+              <div class="metric"><span class="metric-val">37</span><span class="metric-label">Tests (no API keys)</span></div>
+              <div class="metric"><span class="metric-val">5</span><span class="metric-label">LLM Providers</span></div>
+              <div class="metric"><span class="metric-val">PDF+DOCX</span><span class="metric-label">File Support</span></div>
+            </div>
+            <div class="proj-actions"><a href="https://github.com/neeraliacharya/resume-parser" target="_blank" rel="noopener" class="btn btn-ghost btn-sm">GitHub ↗</a></div>
+          </div>
+          <div class="proj-gallery">
+            <div class="gallery-main"><img id="mi-4" src="images/resume parser page1.png" alt="Resume Parser UI" /></div>
+            <div class="gallery-thumbs">
+              <div class="thumb active" onclick="sw('mi-4',this,'images/resume parser page1.png')"><img src="images/resume parser page1.png" alt="" /></div>
+              <div class="thumb" onclick="sw('mi-4',this,'images/resume parser extracting data.png')"><img src="images/resume parser extracting data.png" alt="" /></div>
+              <div class="thumb" onclick="sw('mi-4',this,'images/resume parser fetched data 1.png')"><img src="images/resume parser fetched data 1.png" alt="" /></div>
+              <div class="thumb" onclick="sw('mi-4',this,'images/resume parser fetched data 4.png')"><img src="images/resume parser fetched data 4.png" alt="" /></div>
+              <div class="thumb" onclick="sw('mi-4',this,'images/resume parser fetched data 5.png')"><img src="images/resume parser fetched data 5.png" alt="" /></div>
+              <div class="thumb" onclick="sw('mi-4',this,'images/resume parser fetched data 6.png')"><img src="images/resume parser fetched data 6.png" alt="" /></div>
+              <div class="thumb" onclick="sw('mi-4',this,'images/resume parser page 2.png')"><img src="images/resume parser page 2.png" alt="" /></div>
+              <div class="thumb" onclick="sw('mi-4',this,'images/resume parser fetch already parsed data from document ID.png')"><img src="images/resume parser fetch already parsed data from document ID.png" alt="" /></div>
+              <div class="thumb" onclick="sw('mi-4',this,'images/resume parser rest API get data by document ID.png')"><img src="images/resume parser rest API get data by document ID.png" alt="" /></div>
+              <div class="thumb" onclick="sw('mi-4',this,'images/resume parser rst API upload resume.png')"><img src="images/resume parser rst API upload resume.png" alt="" /></div>
+              <div class="thumb" onclick="sw('mi-4',this,'images/resume parser fetch already parsed data from document ID - non existing case.png')"><img src="images/resume parser fetch already parsed data from document ID - non existing case.png" alt="" /></div>
+            </div>
+          </div>
+        </div>
+        <div class="arch">
+          <div class="arch-head"><span class="lbl">⚙ Architecture</span><span class="ln"></span></div>
+          <div class="flow">
+            <div class="node"><div class="ic">📤</div><div class="nm">Upload</div><div class="sub">PDF / DOCX</div></div>
+            <div class="conn"></div>
+            <div class="node"><div class="ic">📝</div><div class="nm">Text Extract</div><div class="sub">PyMuPDF · docx</div></div>
+            <div class="conn"></div>
+            <div class="node"><div class="ic">🔗</div><div class="nm">URL Pre-scan</div><div class="sub">Regex detect</div></div>
+            <div class="conn"></div>
+            <div class="node accent"><div class="ic">🧠</div><div class="nm">LLM Parse</div><div class="sub">Groq · Gemini · Claude</div></div>
+            <div class="conn"></div>
+            <div class="node"><div class="ic">🔁</div><div class="nm">Self-repair</div><div class="sub">JSON retry</div></div>
+            <div class="conn"></div>
+            <div class="node"><div class="ic">✅</div><div class="nm">Pydantic v2</div><div class="sub">Typed schema</div></div>
+            <div class="conn"></div>
+            <div class="node"><div class="ic">🗄️</div><div class="nm">SQLite WAL</div><div class="sub">FastAPI · Streamlit</div></div>
+          </div>
+          <div class="arch-note">↳ <b>Swappable LLMs:</b> provider set via env var — Groq (Llama 3.3 70B default), Gemini, OpenAI, Anthropic, Ollama. 37 tests run fully mocked.</div>
         </div>
       </div>
 
@@ -660,13 +725,13 @@
 <!-- CONTACT -->
 <section id="contact">
   <div class="wrap">
-    <div class="contact-inner reveal">
+    <div class="contact-inner reveal" style="max-width:860px;">
       <div class="section-label" style="text-align:center">Contact</div>
       <h2 class="section-title" style="text-align:center;margin-bottom:0.75rem">Let's connect</h2>
       <p style="color:var(--text2);font-size:0.9rem;margin-bottom:1.5rem">Open to senior AI and backend engineering opportunities.</p>
       <button type="button" class="btn btn-primary" onclick="openContact()">✦ Send me a message</button>
-      <div class="contact-grid">
-<a href="https://linkedin.com/in/neeraliacharya" target="_blank" rel="noopener" class="clink"><span class="clink-icon">💼</span><div><span class="clink-label">LinkedIn</span><span class="clink-value">linkedin.com/in/neeraliacharya</span></div></a>
+      <div class="contact-grid" style="grid-template-columns:1fr 1fr 1fr;">
+        <a href="https://linkedin.com/in/neeraliacharya" target="_blank" rel="noopener" class="clink"><span class="clink-icon">💼</span><div><span class="clink-label">LinkedIn</span><span class="clink-value">linkedin.com/in/neeraliacharya</span></div></a>
         <a href="https://github.com/neeraliacharya" target="_blank" rel="noopener" class="clink"><span class="clink-icon">🐙</span><div><span class="clink-label">GitHub</span><span class="clink-value">github.com/neeraliacharya</span></div></a>
         <a href="https://medium.com/@neeraliacharya" target="_blank" rel="noopener" class="clink"><span class="clink-icon">✍️</span><div><span class="clink-label">Medium</span><span class="clink-value">medium.com/@neeraliacharya</span></div></a>
       </div>
@@ -707,7 +772,7 @@
         <button type="button" class="btn btn-ghost" onclick="closeContact()">Cancel</button>
         <button type="submit" class="btn btn-primary">Send message →</button>
       </div>
-      <div class="modal-note">Opens your email client pre-addressed and ready to send</div>
+      <div class="modal-note">Sends to niralinacharya@gmail.com via your email client</div>
     </form>
   </div>
 </div>
@@ -719,21 +784,80 @@
 </div>
 
 <script>
-  // gallery switch
-  function sw(imgId, thumbEl, src) {
-    document.getElementById(imgId).src = src;
-    thumbEl.closest('.proj-gallery').querySelectorAll('.thumb').forEach(t => t.classList.remove('active'));
-    thumbEl.classList.add('active');
+  // ── PROJECT GALLERY SLIDESHOWS ──
+  const SLIDE_MS = 3800;
+  const ST = new Map();              // gallery -> { timer, hover }
+  const galleries = [...document.querySelectorAll('.proj-gallery')];
+
+  function thumbsOf(g){ return [...g.querySelectorAll('.thumb')]; }
+  function curIdx(g){ const t = thumbsOf(g); const i = t.findIndex(x => x.classList.contains('active')); return i < 0 ? 0 : i; }
+
+  function stop(g){ const s = ST.get(g) || {}; if (s.timer) clearInterval(s.timer); ST.set(g, { ...s, timer: null }); const bar = g.querySelector('.gbar'); if (bar) bar.classList.remove('run'); }
+  function start(g){
+    stop(g);
+    const s = ST.get(g) || {};
+    if (s.hover) return;             // don't auto-advance while hovering
+    if (thumbsOf(g).length < 2) return;
+    const timer = setInterval(() => step(g, 1), SLIDE_MS);
+    ST.set(g, { ...s, timer });
+    runBar(g);
   }
-  document.querySelectorAll('.gallery-main').forEach(el => {
-    el.addEventListener('click', () => openLb(el.querySelector('img').src));
+  function runBar(g){
+    const bar = g.querySelector('.gbar'); if (!bar) return;
+    const fill = bar.querySelector('i');
+    bar.classList.remove('run'); void fill.offsetWidth;  // restart animation
+    fill.style.animationDuration = SLIDE_MS + 'ms';
+    bar.classList.add('run');
+  }
+  function step(g, dir){
+    const t = thumbsOf(g);
+    const i = (curIdx(g) + dir + t.length) % t.length;
+    t[i].click();                    // reuses each thumb's sw() handler
+  }
+
+  // sw is called by each thumb's inline onclick — now also drives fade + counter + timer
+  function sw(imgId, thumbEl, src){
+    const g = thumbEl.closest('.proj-gallery');
+    const main = g.querySelector('.gallery-main');
+    const img = document.getElementById(imgId);
+    main.classList.add('fading');
+    setTimeout(() => { img.src = src; main.classList.remove('fading'); }, 180);
+    thumbsOf(g).forEach(t => t.classList.remove('active'));
+    thumbEl.classList.add('active');
+    const idx = thumbsOf(g).indexOf(thumbEl);
+    const cur = main.querySelector('.gc-cur'); if (cur) cur.textContent = idx + 1;
+    start(g);                        // reset cadence after any change
+  }
+
+  // build controls + wire each gallery
+  galleries.forEach(g => {
+    const main = g.querySelector('.gallery-main');
+    if (!main) return;
+    const total = thumbsOf(g).length;
+    if (total > 1) {
+      main.insertAdjacentHTML('beforeend',
+        '<button class="gnav prev" type="button" aria-label="Previous">‹</button>' +
+        '<button class="gnav next" type="button" aria-label="Next">›</button>' +
+        '<div class="gcount"><span class="gc-cur">1</span> / ' + total + '</div>' +
+        '<div class="gbar"><i></i></div>');
+      main.querySelector('.prev').addEventListener('click', e => { e.stopPropagation(); step(g, -1); });
+      main.querySelector('.next').addEventListener('click', e => { e.stopPropagation(); step(g, 1); });
+    }
+    g.addEventListener('mouseenter', () => { ST.set(g, { ...ST.get(g), hover: true }); stop(g); });
+    g.addEventListener('mouseleave', () => { ST.set(g, { ...ST.get(g), hover: false }); start(g); });
+    main.addEventListener('click', () => openLb(main.querySelector('img').src));
+    start(g);
   });
-  function openLb(src){ document.getElementById('lb-img').src = src; document.getElementById('lb').classList.add('open'); document.body.style.overflow='hidden'; }
-  function closeLb(){ document.getElementById('lb').classList.remove('open'); document.body.style.overflow=''; }
+
+  function pauseAll(){ galleries.forEach(stop); }
+  function resumeAll(){ galleries.forEach(g => { if (!(ST.get(g) || {}).hover) start(g); }); }
+
+  function openLb(src){ pauseAll(); document.getElementById('lb-img').src = src; document.getElementById('lb').classList.add('open'); document.body.style.overflow='hidden'; }
+  function closeLb(){ document.getElementById('lb').classList.remove('open'); document.body.style.overflow=''; resumeAll(); }
 
   // contact modal
-  function openContact(){ document.getElementById('contactModal').classList.add('open'); document.body.style.overflow='hidden'; setTimeout(()=>document.getElementById('cf-title').focus(),120); }
-  function closeContact(){ document.getElementById('contactModal').classList.remove('open'); document.body.style.overflow=''; }
+  function openContact(){ pauseAll(); document.getElementById('contactModal').classList.add('open'); document.body.style.overflow='hidden'; setTimeout(()=>document.getElementById('cf-title').focus(),120); }
+  function closeContact(){ document.getElementById('contactModal').classList.remove('open'); document.body.style.overflow=''; resumeAll(); }
   function sendContact(e){
     e.preventDefault();
     const name = document.getElementById('cf-name').value.trim();
