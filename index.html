@@ -4,6 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Neerali Acharya — Senior AI Engineer</title>
+  <meta property="og:title" content="Neerali Acharya — Senior Backend & Applied AI Engineer" />
+  <meta property="og:description" content="7 years shipping production systems. RAG, Agentic Workflows, LLM Orchestration, MCP, Vector Search." />
+  <meta property="og:image" content="https://neeraliacharya.github.io/neerali-portfolio/images/og-thumbnail.png" />
+  <meta property="og:url" content="https://neeraliacharya.github.io/neerali-portfolio/" />
+  <meta name="twitter:card" content="summary_large_image" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -320,6 +325,17 @@
     .thumb.active { opacity: 1; border-color: var(--accent); }
     .thumb img { width: 100%; height: 48px; object-fit: cover; object-position: top; display: block; }
 
+    /* no-gallery placeholder */
+    .proj-gallery-placeholder {
+      background: linear-gradient(160deg, rgba(196,181,253,0.18), rgba(251,207,232,0.12));
+      padding: 1.6rem; display: flex; align-items: center; justify-content: center;
+      border-left: 1px solid var(--border); min-height: 260px;
+    }
+    .proj-top.flip .proj-gallery-placeholder { border-left: none; border-right: 1px solid var(--border); }
+    .placeholder-inner { text-align: center; }
+    .placeholder-icon { font-size: 3rem; margin-bottom: 1rem; }
+    .placeholder-label { font-size: 0.78rem; color: var(--muted); font-weight: 500; }
+
     /* ── ARCHITECTURE ── */
     .arch {
       border-top: 1px solid var(--border);
@@ -389,6 +405,8 @@
       .proj-top, .proj-top.flip { grid-template-columns: 1fr; direction: ltr; }
       .proj-top.flip .proj-gallery { border-right: none; border-top: 1px solid var(--border); }
       .proj-gallery { border-left: none; border-top: 1px solid var(--border); }
+      .proj-gallery-placeholder { border-left: none; border-top: 1px solid var(--border); min-height: 160px; }
+      .proj-top.flip .proj-gallery-placeholder { border-right: none; border-top: 1px solid var(--border); }
       .proj-info, .arch { padding-left: 1.75rem; padding-right: 1.75rem; }
       .contact-grid { grid-template-columns: 1fr; }
       .articles-grid { grid-template-columns: 1fr; }
@@ -421,19 +439,19 @@
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-eyebrow"><span class="spark">✦</span> Senior Backend &amp; Applied AI Engineer</div>
+  <div class="hero-eyebrow"><span class="spark">✦</span> Applied AI &amp; Backend Engineer</div>
   <h1><span class="shimmer">Neerali Acharya</span></h1>
   <p class="hero-sub">7 years shipping production backend systems. I build AI that works at scale — not just in demos.</p>
 
   <div class="skill-line">
     <div class="skill-grp"><span class="lead">Backend &amp; AI</span></div>
-    <div class="skill-grp"><span class="it">AI Agents</span><span class="it">RAG</span><span class="it">LLM Integration</span></div>
-    <div class="skill-grp"><span class="it">Python</span><span class="it">AWS</span><span class="it">FastAPI</span><span class="it">ElasticSearch</span><span class="it">Vector DB</span><span class="it">Java</span><span class="it">Vapi</span><span class="it">React</span><span class="it">Docker</span><span class="it">Streamlit</span></div>
+    <div class="skill-grp"><span class="it">AI Agents</span><span class="it">RAG</span><span class="it">LLM Integration</span><span class="it">MCP</span></div>
+    <div class="skill-grp"><span class="it">Python</span><span class="it">Java</span><span class="it">TypeScript</span><span class="it">AWS</span><span class="it">FastAPI</span><span class="it">ElasticSearch</span><span class="it">Vector DB</span><span class="it">Vapi</span><span class="it">React</span><span class="it">Docker</span></div>
   </div>
 
   <div class="hero-stats">
     <div class="stat"><span class="stat-num">7+</span><span class="stat-label">Years Production</span></div>
-    <div class="stat"><span class="stat-num">4</span><span class="stat-label">AI Systems</span></div>
+    <div class="stat"><span class="stat-num">5</span><span class="stat-label">AI Systems</span></div>
     <div class="stat"><span class="stat-num">95%</span><span class="stat-label">SQL Cost Reduction</span></div>
     <div class="stat"><span class="stat-num">71ms</span><span class="stat-label">Webhook ACK Median</span></div>
   </div>
@@ -493,10 +511,10 @@
       <div class="proj-card reveal">
         <div class="proj-top">
           <div class="proj-info">
-            <div class="proj-num">01 / 04</div>
+            <div class="proj-num">01 / 05</div>
             <h3 class="proj-title">AI Receptionist<br>Chat and Voice Agent</h3>
             <p class="proj-desc">Autonomous AI receptionist for a Pilates studio — handles inbound voice calls, bookings, rescheduling, and pricing. Built with a 4-model LLM fallback chain for uninterrupted service under API failures.</p>
-            <div class="proj-tags"><span class="ptag">Python</span><span class="ptag">FastAPI</span><span class="ptag">Vapi</span><span class="ptag">Groq</span><span class="ptag">Gemini 2.0 Flash</span><span class="ptag">Google Calendar API</span><span class="ptag">Google Sheets API</span><span class="ptag">SSE</span><span class="ptag">Gradio</span></div>
+            <div class="proj-tags"><span class="ptag">Python</span><span class="ptag">FastAPI</span><span class="ptag">Vapi</span><span class="ptag">Groq</span><span class="ptag">Gemini 2.0 Flash</span><span class="ptag">Google Calendar API</span><span class="ptag">Google Sheets API</span><span class="ptag">SSE</span><span class="ptag">Pydantic-Settings</span><span class="ptag">Gradio</span><span class="ptag">asyncio</span><span class="ptag">ngrok</span></div>
             <div class="proj-metrics">
               <div class="metric"><span class="metric-val">4</span><span class="metric-label">LLM Fallback Chain</span></div>
               <div class="metric"><span class="metric-val">10</span><span class="metric-label">Function Tools</span></div>
@@ -542,14 +560,14 @@
       <div class="proj-card reveal">
         <div class="proj-top flip">
           <div class="proj-info">
-            <div class="proj-num">02 / 04</div>
+            <div class="proj-num">02 / 05</div>
             <h3 class="proj-title">AI Doc Assist —<br>Knowledge Assistant</h3>
-            <p class="proj-desc">Production-grade RAG platform for internal documentation. Upload any PDF, query it conversationally — every answer is grounded with doc name + page-level source traceability.</p>
-            <div class="proj-tags"><span class="ptag">Python</span><span class="ptag">FastAPI</span><span class="ptag">LangChain</span><span class="ptag">Sentence Transformers</span><span class="ptag">Cross-Encoder Re-ranking</span><span class="ptag">Groq</span><span class="ptag">Pinecone</span><span class="ptag">FAISS</span><span class="ptag">AWS S3/SQS</span><span class="ptag">React 18</span></div>
+            <p class="proj-desc">Production-grade RAG platform for internal documentation. Upload any PDF, query it conversationally — every answer is grounded with doc name + page-level source traceability. Built RAGAS evaluation harness measuring Faithfulness 0.88, Answer Relevancy 0.76, Context Precision 0.81.</p>
+            <div class="proj-tags"><span class="ptag">Python</span><span class="ptag">FastAPI</span><span class="ptag">LangChain</span><span class="ptag">Sentence Transformers</span><span class="ptag">Cross-Encoder Re-ranking</span><span class="ptag">Groq</span><span class="ptag">Qwen/LLaMA</span><span class="ptag">Pinecone</span><span class="ptag">FAISS</span><span class="ptag">AWS S3/SQS</span><span class="ptag">DynamoDB</span><span class="ptag">React 18</span><span class="ptag">Ollama</span><span class="ptag">RAGAS</span><span class="ptag">pytest</span></div>
             <div class="proj-metrics">
               <div class="metric"><span class="metric-val">500+</span><span class="metric-label">Docs Indexed</span></div>
               <div class="metric"><span class="metric-val">&lt;1s</span><span class="metric-label">vs 15–30 min</span></div>
-              <div class="metric"><span class="metric-val">202</span><span class="metric-label">Instant Accept</span></div>
+              <div class="metric"><span class="metric-val">0.88</span><span class="metric-label">RAGAS Faithfulness</span></div>
             </div>
           </div>
           <div class="proj-gallery">
@@ -585,7 +603,7 @@
       <div class="proj-card reveal">
         <div class="proj-top">
           <div class="proj-info">
-            <div class="proj-num">03 / 04</div>
+            <div class="proj-num">03 / 05</div>
             <h3 class="proj-title">AI Webhook<br>Ingestion Agent</h3>
             <p class="proj-desc">Real-time supply chain normaliser. Ingests raw webhook events from logistics providers, classifies them with LLMs, and writes typed schemas to PostgreSQL — all under 100ms vendor ACK.</p>
             <div class="proj-tags"><span class="ptag">Python</span><span class="ptag">FastAPI</span><span class="ptag">SQLAlchemy async</span><span class="ptag">PostgreSQL</span><span class="ptag">Pydantic v2</span><span class="ptag">asyncio.Queue</span><span class="ptag">Groq</span><span class="ptag">Gemini</span><span class="ptag">Anthropic Claude</span><span class="ptag">Docker</span></div>
@@ -628,12 +646,59 @@
         </div>
       </div>
 
-
       <!-- 04 -->
       <div class="proj-card reveal">
         <div class="proj-top flip">
           <div class="proj-info">
-            <div class="proj-num">04 / 04</div>
+            <div class="proj-num">04 / 05</div>
+            <h3 class="proj-title">IT Onboarding Automator —<br>MCP Provisioning Agent</h3>
+            <p class="proj-desc">Spec-driven MCP provisioning agent built in Kiro. Exposes an MCP server with three agent-callable tools — lets an AI agent inspect access and retry failed events without direct DB access. Dual-delivery mode: HTTP API and MCP server share a single provisioner module with exactly-once state machine guarantees.</p>
+            <div class="proj-tags"><span class="ptag">TypeScript</span><span class="ptag">Node.js</span><span class="ptag">Express</span><span class="ptag">MCP SDK</span><span class="ptag">better-sqlite3</span><span class="ptag">Jest</span><span class="ptag">Ollama</span><span class="ptag">Kiro</span><span class="ptag">Spec-Driven Dev</span><span class="ptag">MCP Inspector</span></div>
+            <div class="proj-metrics">
+              <div class="metric"><span class="metric-val">3</span><span class="metric-label">Agent Tools</span></div>
+              <div class="metric"><span class="metric-val">13</span><span class="metric-label">Jest Tests</span></div>
+              <div class="metric"><span class="metric-val">0</span><span class="metric-label">LLM Dependency</span></div>
+            </div>
+            <div class="proj-actions"><a href="https://github.com/neeraliacharya/it-onboarding-automator" target="_blank" rel="noopener" class="btn btn-ghost btn-sm">GitHub ↗</a></div>
+          </div>
+          <div class="proj-gallery">
+            <div class="gallery-main"><img id="mi-4" src="images/onboaring automator hire new.png" alt="IT Onboarding Automator - hire new employee" /></div>
+            <div class="gallery-thumbs">
+              <div class="thumb active" onclick="sw('mi-4',this,'images/onboaring automator hire new.png')"><img src="images/onboaring automator hire new.png" alt="" /></div>
+              <div class="thumb" onclick="sw('mi-4',this,'images/onboaring automator try to hire with idempotent true .png')"><img src="images/onboaring automator try to hire with idempotent true .png" alt="" /></div>
+              <div class="thumb" onclick="sw('mi-4',this,'images/onboaring automator execute MCP tool to fetch existing user.png')"><img src="images/onboaring automator execute MCP tool to fetch existing user.png" alt="" /></div>
+              <div class="thumb" onclick="sw('mi-4',this,'images/onboaring automator execute MCP tool to fetch non existent user.png')"><img src="images/onboaring automator execute MCP tool to fetch non existent user.png" alt="" /></div>
+              <div class="thumb" onclick="sw('mi-4',this,'images/onboaring automator ollama hire new employee.png')"><img src="images/onboaring automator ollama hire new employee.png" alt="" /></div>
+              <div class="thumb" onclick="sw('mi-4',this,'images/onboaring automator ollama logs with message.png')"><img src="images/onboaring automator ollama logs with message.png" alt="" /></div>
+            </div>
+          </div>
+        </div>
+        <div class="arch">
+          <div class="arch-head"><span class="lbl">⚙ Architecture</span><span class="ln"></span></div>
+          <div class="flow">
+            <div class="node"><div class="ic">🤖</div><div class="nm">AI Agent</div><div class="sub">Kiro / Ollama</div></div>
+            <div class="conn"></div>
+            <div class="node accent"><div class="ic">🔌</div><div class="nm">MCP Server</div><div class="sub">stdio/JSON-RPC</div></div>
+            <div class="conn"></div>
+            <div class="node"><div class="ic">🛠️</div><div class="nm">3 Agent Tools</div><div class="sub">inspect · retry</div></div>
+            <div class="conn"></div>
+            <div class="node"><div class="ic">⚙️</div><div class="nm">Provisioner</div><div class="sub">Shared module</div></div>
+            <div class="conn"></div>
+            <div class="node"><div class="ic">🔄</div><div class="nm">State Machine</div><div class="sub">pending→done→failed</div></div>
+            <div class="conn"></div>
+            <div class="node"><div class="ic">🗄️</div><div class="nm">SQLite WAL</div><div class="sub">Audit trail</div></div>
+            <div class="conn"></div>
+            <div class="node"><div class="ic">🌐</div><div class="nm">HTTP API</div><div class="sub">Express · webhooks</div></div>
+          </div>
+          <div class="arch-note">↳ <b>Spec-driven:</b> full SPEC.md authored first; implemented in AI-directed loops with tagged Git checkpoints v1-webhook → v2-mcp → v3-final.</div>
+        </div>
+      </div>
+
+      <!-- 05 -->
+      <div class="proj-card reveal">
+        <div class="proj-top">
+          <div class="proj-info">
+            <div class="proj-num">05 / 05</div>
             <h3 class="proj-title">LLM-Powered<br>Resume Parser</h3>
             <p class="proj-desc">Structured data extraction from PDF and DOCX resumes using a multi-provider LLM backend. Pre-processes documents with regex URL detection before LLM ingestion, implements self-repair retry on malformed JSON, and exposes results via FastAPI REST and a Streamlit UI — no external infrastructure required.</p>
             <div class="proj-tags"><span class="ptag">Python</span><span class="ptag">FastAPI</span><span class="ptag">Streamlit</span><span class="ptag">Pydantic v2</span><span class="ptag">PyMuPDF</span><span class="ptag">python-docx</span><span class="ptag">Groq</span><span class="ptag">Gemini</span><span class="ptag">Anthropic Claude</span><span class="ptag">SQLite</span><span class="ptag">pytest</span></div>
@@ -645,19 +710,19 @@
             <div class="proj-actions"><a href="https://github.com/neeraliacharya/resume-parser" target="_blank" rel="noopener" class="btn btn-ghost btn-sm">GitHub ↗</a></div>
           </div>
           <div class="proj-gallery">
-            <div class="gallery-main"><img id="mi-4" src="images/resume parser page1.png" alt="Resume Parser UI" /></div>
+            <div class="gallery-main"><img id="mi-5" src="images/resume parser page1.png" alt="Resume Parser UI" /></div>
             <div class="gallery-thumbs">
-              <div class="thumb active" onclick="sw('mi-4',this,'images/resume parser page1.png')"><img src="images/resume parser page1.png" alt="" /></div>
-              <div class="thumb" onclick="sw('mi-4',this,'images/resume parser extracting data.png')"><img src="images/resume parser extracting data.png" alt="" /></div>
-              <div class="thumb" onclick="sw('mi-4',this,'images/resume parser fetched data 1.png')"><img src="images/resume parser fetched data 1.png" alt="" /></div>
-              <div class="thumb" onclick="sw('mi-4',this,'images/resume parser fetched data 4.png')"><img src="images/resume parser fetched data 4.png" alt="" /></div>
-              <div class="thumb" onclick="sw('mi-4',this,'images/resume parser fetched data 5.png')"><img src="images/resume parser fetched data 5.png" alt="" /></div>
-              <div class="thumb" onclick="sw('mi-4',this,'images/resume parser fetched data 6.png')"><img src="images/resume parser fetched data 6.png" alt="" /></div>
-              <div class="thumb" onclick="sw('mi-4',this,'images/resume parser page 2.png')"><img src="images/resume parser page 2.png" alt="" /></div>
-              <div class="thumb" onclick="sw('mi-4',this,'images/resume parser fetch already parsed data from document ID.png')"><img src="images/resume parser fetch already parsed data from document ID.png" alt="" /></div>
-              <div class="thumb" onclick="sw('mi-4',this,'images/resume parser rest API get data by document ID.png')"><img src="images/resume parser rest API get data by document ID.png" alt="" /></div>
-              <div class="thumb" onclick="sw('mi-4',this,'images/resume parser rst API upload resume.png')"><img src="images/resume parser rst API upload resume.png" alt="" /></div>
-              <div class="thumb" onclick="sw('mi-4',this,'images/resume parser fetch already parsed data from document ID - non existing case.png')"><img src="images/resume parser fetch already parsed data from document ID - non existing case.png" alt="" /></div>
+              <div class="thumb active" onclick="sw('mi-5',this,'images/resume parser page1.png')"><img src="images/resume parser page1.png" alt="" /></div>
+              <div class="thumb" onclick="sw('mi-5',this,'images/resume parser extracting data.png')"><img src="images/resume parser extracting data.png" alt="" /></div>
+              <div class="thumb" onclick="sw('mi-5',this,'images/resume parser fetched data 1.png')"><img src="images/resume parser fetched data 1.png" alt="" /></div>
+              <div class="thumb" onclick="sw('mi-5',this,'images/resume parser fetched data 4.png')"><img src="images/resume parser fetched data 4.png" alt="" /></div>
+              <div class="thumb" onclick="sw('mi-5',this,'images/resume parser fetched data 5.png')"><img src="images/resume parser fetched data 5.png" alt="" /></div>
+              <div class="thumb" onclick="sw('mi-5',this,'images/resume parser fetched data 6.png')"><img src="images/resume parser fetched data 6.png" alt="" /></div>
+              <div class="thumb" onclick="sw('mi-5',this,'images/resume parser page 2.png')"><img src="images/resume parser page 2.png" alt="" /></div>
+              <div class="thumb" onclick="sw('mi-5',this,'images/resume parser fetch already parsed data from document ID.png')"><img src="images/resume parser fetch already parsed data from document ID.png" alt="" /></div>
+              <div class="thumb" onclick="sw('mi-5',this,'images/resume parser rest API get data by document ID.png')"><img src="images/resume parser rest API get data by document ID.png" alt="" /></div>
+              <div class="thumb" onclick="sw('mi-5',this,'images/resume parser rst API upload resume.png')"><img src="images/resume parser rst API upload resume.png" alt="" /></div>
+              <div class="thumb" onclick="sw('mi-5',this,'images/resume parser fetch already parsed data from document ID - non existing case.png')"><img src="images/resume parser fetch already parsed data from document ID - non existing case.png" alt="" /></div>
             </div>
           </div>
         </div>
@@ -694,12 +759,13 @@
       <h2 class="section-title">What I work with</h2>
     </div>
     <div class="skills-grid">
-      <div class="skill-card reveal"><div class="skill-card-label">Languages</div><div class="skill-tags"><span class="stag">Python</span><span class="stag">Java</span><span class="stag">JavaScript</span><span class="stag">PL/SQL</span></div></div>
-      <div class="skill-card reveal"><div class="skill-card-label">AI / ML</div><div class="skill-tags"><span class="stag">RAG</span><span class="stag">LangChain</span><span class="stag">Vector Search</span><span class="stag">Prompt Engineering</span><span class="stag">Agentic Workflows</span><span class="stag">Function Calling</span></div></div>
-      <div class="skill-card reveal"><div class="skill-card-label">LLMs &amp; Frameworks</div><div class="skill-tags"><span class="stag">Groq API</span><span class="stag">Anthropic Claude</span><span class="stag">Gemini 2.0 Flash</span><span class="stag">Qwen / LLaMA</span><span class="stag">Vapi</span><span class="stag">Sentence Transformers</span><span class="stag">Ollama</span></div></div>
-      <div class="skill-card reveal"><div class="skill-card-label">Backend &amp; APIs</div><div class="skill-tags"><span class="stag">FastAPI</span><span class="stag">Spring Boot</span><span class="stag">Node.js</span><span class="stag">SSE</span><span class="stag">Webhooks</span><span class="stag">SQLAlchemy</span></div></div>
-      <div class="skill-card reveal"><div class="skill-card-label">Databases &amp; Vector DB</div><div class="skill-tags"><span class="stag">Pinecone</span><span class="stag">FAISS</span><span class="stag">Elasticsearch</span><span class="stag">PostgreSQL</span><span class="stag">MySQL</span><span class="stag">Redis</span><span class="stag">DynamoDB</span></div></div>
-      <div class="skill-card reveal"><div class="skill-card-label">Cloud &amp; DevOps</div><div class="skill-tags"><span class="stag">AWS S3</span><span class="stag">SQS</span><span class="stag">Lambda</span><span class="stag">EC2</span><span class="stag">Kinesis</span><span class="stag">Step Functions</span><span class="stag">Docker</span><span class="stag">Jenkins</span></div></div>
+      <div class="skill-card reveal"><div class="skill-card-label">Languages</div><div class="skill-tags"><span class="stag">Python</span><span class="stag">Java</span><span class="stag">JavaScript</span><span class="stag">TypeScript</span><span class="stag">PL/SQL</span></div></div>
+      <div class="skill-card reveal"><div class="skill-card-label">AI / ML</div><div class="skill-tags"><span class="stag">RAG</span><span class="stag">LangChain</span><span class="stag">Vector Search</span><span class="stag">Semantic Search</span><span class="stag">Prompt Engineering</span><span class="stag">Agentic Workflows</span><span class="stag">Tool Calling</span><span class="stag">LLM Integration</span><span class="stag">MCP Tool Design</span><span class="stag">Spec-Driven Development</span><span class="stag">RAGAS</span></div></div>
+      <div class="skill-card reveal"><div class="skill-card-label">LLMs &amp; Frameworks</div><div class="skill-tags"><span class="stag">Groq API</span><span class="stag">Anthropic Claude</span><span class="stag">Gemini 2.0 Flash</span><span class="stag">Qwen / LLaMA</span><span class="stag">Vapi</span><span class="stag">Sentence Transformers</span><span class="stag">Cross-Encoder Re-ranking</span><span class="stag">Ollama</span></div></div>
+      <div class="skill-card reveal"><div class="skill-card-label">Backend &amp; APIs</div><div class="skill-tags"><span class="stag">FastAPI</span><span class="stag">Spring Boot</span><span class="stag">Spring JPA</span><span class="stag">Node.js</span><span class="stag">Express</span><span class="stag">SSE</span><span class="stag">Webhooks</span><span class="stag">SQLAlchemy</span></div></div>
+      <div class="skill-card reveal"><div class="skill-card-label">Databases &amp; Vector DB</div><div class="skill-tags"><span class="stag">Pinecone</span><span class="stag">FAISS</span><span class="stag">Elasticsearch</span><span class="stag">PostgreSQL</span><span class="stag">MySQL</span><span class="stag">Redis</span><span class="stag">MongoDB</span><span class="stag">DynamoDB</span><span class="stag">SQLite</span></div></div>
+      <div class="skill-card reveal"><div class="skill-card-label">Cloud &amp; DevOps</div><div class="skill-tags"><span class="stag">AWS S3</span><span class="stag">SQS</span><span class="stag">DynamoDB</span><span class="stag">DLQ</span><span class="stag">IAM</span><span class="stag">Lambda</span><span class="stag">EC2</span><span class="stag">Kinesis</span><span class="stag">Step Functions</span><span class="stag">CloudWatch</span><span class="stag">Docker</span><span class="stag">Jenkins</span></div></div>
+      <div class="skill-card reveal"><div class="skill-card-label">Tools &amp; Testing</div><div class="skill-tags"><span class="stag">Gradio</span><span class="stag">Pydantic v2</span><span class="stag">Kiro</span><span class="stag">Jest</span><span class="stag">pytest</span><span class="stag">React 18</span><span class="stag">MCP Inspector</span><span class="stag">Uvicorn</span><span class="stag">Vite</span><span class="stag">Git</span></div></div>
     </div>
   </div>
 </section>
@@ -786,7 +852,7 @@
 <script>
   // ── PROJECT GALLERY SLIDESHOWS ──
   const SLIDE_MS = 3800;
-  const ST = new Map();              // gallery -> { timer, hover }
+  const ST = new Map();
   const galleries = [...document.querySelectorAll('.proj-gallery')];
 
   function thumbsOf(g){ return [...g.querySelectorAll('.thumb')]; }
@@ -796,7 +862,7 @@
   function start(g){
     stop(g);
     const s = ST.get(g) || {};
-    if (s.hover) return;             // don't auto-advance while hovering
+    if (s.hover) return;
     if (thumbsOf(g).length < 2) return;
     const timer = setInterval(() => step(g, 1), SLIDE_MS);
     ST.set(g, { ...s, timer });
@@ -805,17 +871,16 @@
   function runBar(g){
     const bar = g.querySelector('.gbar'); if (!bar) return;
     const fill = bar.querySelector('i');
-    bar.classList.remove('run'); void fill.offsetWidth;  // restart animation
+    bar.classList.remove('run'); void fill.offsetWidth;
     fill.style.animationDuration = SLIDE_MS + 'ms';
     bar.classList.add('run');
   }
   function step(g, dir){
     const t = thumbsOf(g);
     const i = (curIdx(g) + dir + t.length) % t.length;
-    t[i].click();                    // reuses each thumb's sw() handler
+    t[i].click();
   }
 
-  // sw is called by each thumb's inline onclick — now also drives fade + counter + timer
   function sw(imgId, thumbEl, src){
     const g = thumbEl.closest('.proj-gallery');
     const main = g.querySelector('.gallery-main');
@@ -826,10 +891,9 @@
     thumbEl.classList.add('active');
     const idx = thumbsOf(g).indexOf(thumbEl);
     const cur = main.querySelector('.gc-cur'); if (cur) cur.textContent = idx + 1;
-    start(g);                        // reset cadence after any change
+    start(g);
   }
 
-  // build controls + wire each gallery
   galleries.forEach(g => {
     const main = g.querySelector('.gallery-main');
     if (!main) return;
@@ -855,7 +919,6 @@
   function openLb(src){ pauseAll(); document.getElementById('lb-img').src = src; document.getElementById('lb').classList.add('open'); document.body.style.overflow='hidden'; }
   function closeLb(){ document.getElementById('lb').classList.remove('open'); document.body.style.overflow=''; resumeAll(); }
 
-  // contact modal
   function openContact(){ pauseAll(); document.getElementById('contactModal').classList.add('open'); document.body.style.overflow='hidden'; setTimeout(()=>document.getElementById('cf-title').focus(),120); }
   function closeContact(){ document.getElementById('contactModal').classList.remove('open'); document.body.style.overflow=''; resumeAll(); }
   function sendContact(e){
@@ -880,7 +943,6 @@
 
   document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeLb(); closeContact(); } });
 
-  // scroll reveal
   const io = new IntersectionObserver((entries) => {
     entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
   }, { threshold: 0.12 });
@@ -912,7 +974,6 @@
       n.x += n.vx; n.y += n.vy;
       if (n.x < 0 || n.x > w) n.vx *= -1;
       if (n.y < 0 || n.y > h) n.vy *= -1;
-      // connections
       for (let j = i+1; j < nodes.length; j++) {
         const m = nodes[j];
         const dx = n.x-m.x, dy = n.y-m.y;
@@ -925,7 +986,6 @@
         }
       }
     }
-    // nodes
     for (const n of nodes) {
       ctx.fillStyle = 'rgba(140,120,240,0.35)';
       ctx.beginPath(); ctx.arc(n.x,n.y,n.r,0,Math.PI*2); ctx.fill();
